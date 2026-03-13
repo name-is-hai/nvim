@@ -16,7 +16,10 @@ return {
         },
         sections = {
           -- Left Side
-          lualine_a = { "mode" },                          -- Shows NORMAL, INSERT, or VISUAL
+          lualine_a = {
+            "mode",
+            { require("easy-dotnet.ui-modules.jobs").lualine }
+          },                                               -- Shows NORMAL, INSERT, or VISUAL
           lualine_b = { "branch", "diff", "diagnostics" }, -- Your Git branch and any error counts
           lualine_c = { "filename" },                      -- The file you are currently editing
 

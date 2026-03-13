@@ -65,9 +65,33 @@ return {
         enabled = true,
         sources = {
           explorer = {
-            hidden = true, },
+            hidden = true,
+            win = {
+              list = {
+                keys = {
+                  ["A"] = "explorer_add_dotnet",
+                },
+              },
+            },
+            actions = {
+              explorer_add_dotnet = function(picker)
+                local dir = picker:dir()
+                local easydotnet = require("easy-dotnet")
+
+                easydotnet.create_new_item(dir, function(item_path)
+                  local tree = require("snacks.explorer.tree")
+                  local actions = require("snacks.explorer.actions")
+                  tree:open(dir)
+                  tree:refresh(dir)
+                  actions.update(picker, { target = item_path })
+                  picker:focus()
+                end)
+              end,
+            },
+          },
           files = {
-            hidden = true, },
+            hidden = true,
+          },
         },
       },
       statuscolumn = {
@@ -83,25 +107,28 @@ return {
       },
     },
     keys = {
-      -- File Searching & Explorer
-      { "<leader><space>", function() Snacks.picker.smart() end,              desc = "Smart Find Files" },
-      { "<leader>sg",      function() Snacks.picker.grep() end,               desc = "Grep (Search Text)" },
-      { "<leader>e",       function() Snacks.explorer() end,                  desc = "Toggle File Explorer" },
+      -- Find & Explorer (<leader>f)
+      { "<leader><space>", function() Snacks.picker.files() end,              desc = "Find Files" },
+      { "<leader>fg",      function() Snacks.picker.grep() end,               desc = "Find Grep (Search Text)" },
+      { "<leader>fe",      function() Snacks.explorer() end,                  desc = "File Explorer" },
+      { "<leader>fb",      function() Snacks.picker.buffers() end,            desc = "Find Open Buffers" },
 
-      -- Git & Terminal Workflows
+      -- Git & Terminal (<leader>g)
       { "<leader>gg",      function() Snacks.lazygit() end,                   desc = "Lazygit" },
       { "<c-/>",           function() Snacks.terminal() end,                  mode = { "n", "t" },                 desc = "Toggle Terminal" },
 
-      -- LSP Navigation (These will work once we set up your C#/TS servers)
+      -- LSP Navigation & Code (<leader>c)
       { "gd",              function() Snacks.picker.lsp_definitions() end,    desc = "Goto Definition" },
       { "gr",              function() Snacks.picker.lsp_references() end,     nowait = true,                       desc = "References" },
-      { "<leader>rn",      function() Snacks.rename() end,                    desc = "Rename Symbol" },
-      { "<leader>sd",      function() Snacks.picker.diagnostics() end,        desc = "Search Diagnostics (Global)" },
-      { "<leader>sD",      function() Snacks.picker.diagnostics_buffer() end, desc = "Search Diagnostics (Buffer)" },
+      { "<leader>cr",      function() Snacks.rename() end,                    desc = "Code Rename" },
 
-      -- Notification
-      { "<leader>un",      function() Snacks.notifier.hide() end,             desc = "Dismiss All Notification" },
-      { "<leader>nh",      function() Snacks.notifier.show_history() end,     desc = "Notification History" },
+      -- Diagnostics (<leader>x)
+      { "<leader>xd",      function() Snacks.picker.diagnostics() end,        desc = "Search Diagnostics (Global)" },
+      { "<leader>xD",      function() Snacks.picker.diagnostics_buffer() end, desc = "Search Diagnostics (Buffer)" },
+
+      -- UI & Notifications (<leader>u)
+      { "<leader>un",      function() Snacks.notifier.hide() end,             desc = "Dismiss All Notifications" },
+      { "<leader>uh",      function() Snacks.notifier.show_history() end,     desc = "Notification History" },
     },
   },
 }

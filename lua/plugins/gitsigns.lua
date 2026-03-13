@@ -29,19 +29,19 @@ return {
           vim.keymap.set(mode, l, r, { buffer = bufnr, desc = desc })
         end
 
-        -- 1. Navigation (Jump between changes)
+        -- 1. Navigation
         map("n", "]h", gs.next_hunk, "Next Git hunk")
         map("n", "[h", gs.prev_hunk, "Previous Git hunk")
 
-        -- 2. Actions (Preview, Stage, and Revert)
-        map("n", "<leader>hp", gs.preview_hunk, "Preview Git hunk")
-        map("n", "<leader>hs", gs.stage_hunk, "Stage Git hunk")
-        map("n", "<leader>hr", gs.reset_hunk, "Reset Git hunk")
-        map("n", "<leader>hS", gs.stage_buffer, "Stage entire file")
-        map("n", "<leader>hR", gs.reset_buffer, "Reset entire file")
+        -- 2. Actions (Moved to <leader>gh - Git Hunk)
+        map("n", "<leader>ghp", gs.preview_hunk, "Preview Git hunk")
+        map("n", "<leader>ghs", gs.stage_hunk, "Stage Git hunk")
+        map("n", "<leader>ghr", gs.reset_hunk, "Reset Git hunk")
+        map("n", "<leader>ghS", gs.stage_buffer, "Stage entire file")
+        map("n", "<leader>ghR", gs.reset_buffer, "Reset entire file")
 
         -- 3. Detailed Blame
-        map("n", "<leader>hb", function() gs.blame_line { full = true } end, "Full Blame popup")
+        map("n", "<leader>gb", function() gs.blame_line { full = true } end, "Full Blame popup")
       end,
     },
   }

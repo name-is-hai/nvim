@@ -30,7 +30,6 @@ return {
         "dotenv-linter",
         "trivy",
         "terraform",
-        "roslyn",
         "prettier",
       },
     },
@@ -45,7 +44,6 @@ return {
       ensure_installed = {
         "bashls",
         "biome",
-        -- "roslyn_ls",
         "cssls",
         "docker_compose_language_service",
         "dockerls",
@@ -105,29 +103,15 @@ return {
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
-          local opts = { buffer = ev.buf, silent = true }
-          vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-          vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-          vim.keymap.set("n", "<leader>cd", vim.diagnostic.open_float, opts)
+          local map = function(keys, func, desc)
+            vim.keymap.set("n", keys, func, { buffer = ev.buf, silent = true, desc = "LSP: " .. desc })
+          end
+
+          map("K", vim.lsp.buf.hover, "Hover Documentation")
+          map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
+          map("<leader>cd", vim.diagnostic.open_float, "Show Line Diagnostics")
         end,
       })
     end,
   },
-
-  -- 5. Roslyn (The custom C# server)
-  {
-    "seblyng/roslyn.nvim",
-    ft = { "cs", "csproj", "sln" },
-    opts = function()
-      return {
-        filewatching = "roslyn",
-        -- Broadcast Blink's capabilities to the C# server
-        config = {
-          capabilities = require("blink.cmp").get_lsp_capabilities()
-        }
-      }
-    end,
-  },
-
-
 }
