@@ -107,28 +107,40 @@ return {
       },
     },
     keys = {
-      -- Find & Explorer (<leader>f)
-      { "<leader><space>", function() Snacks.picker.files() end,              desc = "Find Files" },
-      { "<leader>fg",      function() Snacks.picker.grep() end,               desc = "Find Grep (Search Text)" },
-      { "<leader>fe",      function() Snacks.explorer() end,                  desc = "File Explorer" },
-      { "<leader>fb",      function() Snacks.picker.buffers() end,            desc = "Find Open Buffers" },
+      -- Top Pickers & Explorer
+      { "<leader>,",  function() Snacks.picker.buffers() end,             desc = "Find Buffers" },
+      { "<leader>/",  function() Snacks.picker.grep() end,                desc = "Find Grep (Search Text)" },
+      { "<leader>:",  function() Snacks.picker.command_history() end,     desc = "Command History" },
+      { "<leader>e",  function() Snacks.explorer() end,                   desc = "File Explorer" },
 
-      -- Git & Terminal (<leader>g)
-      { "<leader>gg",      function() Snacks.lazygit() end,                   desc = "Lazygit" },
-      { "<c-/>",           function() Snacks.terminal() end,                  mode = { "n", "t" },                 desc = "Toggle Terminal" },
+      -- Find (<leader>f...)
+      { "<leader>ff", function() Snacks.picker.files() end,               desc = "Find Files" },
+      { "<leader>fp", function() Snacks.picker.projects() end,            desc = "Find Projects" },
+      { "<leader>fr", function() Snacks.picker.recent() end,              desc = "Find Recent" },
 
-      -- LSP Navigation & Code (<leader>c)
-      { "gd",              function() Snacks.picker.lsp_definitions() end,    desc = "Goto Definition" },
-      { "gr",              function() Snacks.picker.lsp_references() end,     nowait = true,                       desc = "References" },
-      { "<leader>cr",      function() Snacks.rename() end,                    desc = "Code Rename" },
+      -- Search Mappings (<leader>s...)
+      { "<leader>sk", function() Snacks.picker.keymaps() end,             desc = "Search Keymaps" },
+      { "<leader>sl", function() Snacks.picker.loclist() end,             desc = "Search Location List" },
+      { "<leader>sq", function() Snacks.picker.qflist() end,              desc = "Search Quickfix List" },
+      { "<leader>sb", function() Snacks.picker.grep_buffers() end,        desc = "Search Open Buffers" },
+      { "<leader>sD", function() Snacks.picker.diagnostics() end,         desc = "Search Diagnostics" },
+      { "<leader>sd", function() Snacks.picker.diagnostics_buffer() end,  desc = "Search Buffer Diagnostics" },
 
-      -- Diagnostics (<leader>x)
-      { "<leader>xd",      function() Snacks.picker.diagnostics() end,        desc = "Search Diagnostics (Global)" },
-      { "<leader>xD",      function() Snacks.picker.diagnostics_buffer() end, desc = "Search Diagnostics (Buffer)" },
+      -- Git & Terminal (<leader>g...)
+      { "<leader>gg", function() Snacks.lazygit() end,                    desc = "Lazygit" },
+      { "<leader>gd", function() Snacks.picker.git_diff() end,            desc = "Git Diff (Hunks)" },
+      { "<leader>gf", function() Snacks.picker.git_log_file() end,        desc = "Git Log File" },
+      { "<c-/>",      function() Snacks.terminal() end,                   mode = { "n", "t" },               desc = "Toggle Terminal" },
 
-      -- UI & Notifications (<leader>u)
-      { "<leader>un",      function() Snacks.notifier.hide() end,             desc = "Dismiss All Notifications" },
-      { "<leader>uh",      function() Snacks.notifier.show_history() end,     desc = "Notification History" },
+      -- LSP Navigation & Code (<leader>c...)
+      { "gi",         function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
+      { "gd",         function() Snacks.picker.lsp_definitions() end,     desc = "Goto Definition" },
+      { "gr",         function() Snacks.picker.lsp_references() end,      nowait = true,                     desc = "References" },
+      { "<leader>cr", function() Snacks.rename() end,                     desc = "Code Rename" },
+
+      -- UI & Notifications (<leader>u...)
+      { "<leader>un", function() Snacks.notifier.hide() end,              desc = "Dismiss All Notifications" },
+      { "<leader>uh", function() Snacks.notifier.show_history() end,      desc = "Notification History" },
     },
   },
 }

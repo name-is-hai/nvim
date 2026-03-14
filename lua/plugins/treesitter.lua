@@ -126,25 +126,4 @@ return {
       })
     end,
   },
-  -- Vertical Scope Line
-  -- {
-  --   "lukas-reineke/indent-blankline.nvim",
-  --   event = { "BufReadPost", "BufNewFile" },
-  --   main = "ibl",
-  --   opts = {
-  --     indent = {
-  --       char = "▏", -- A very thin vertical line
-  --     },
-  --     scope = {
-  --       enabled = true,
-  --       show_start = false, -- No underline at the top, keep it clean
-  --       show_end = false, -- No underline at the bottom
-  --       char = "▏", -- Keep the line thin even when highlighted
-  --       highlight = "Function", -- This makes the line "light up" using your function color
-  --     },
-  --     exclude = {
-  --       filetypes = { "help", "lazy", "mason", "notify", "toggleterm" },
-  --     },
-  --   },
-  -- }
 }
