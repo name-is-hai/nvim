@@ -65,7 +65,7 @@ return {
         enabled = true,
         sources = {
           explorer = {
-            hidden = true,
+            -- hidden = true,
             win = {
               list = {
                 keys = {
@@ -89,9 +89,9 @@ return {
               end,
             },
           },
-          files = {
-            hidden = true,
-          },
+          -- files = {
+          --   hidden = true,
+          -- },
         },
       },
       statuscolumn = {
