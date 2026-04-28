@@ -136,7 +136,7 @@ return {
       { "gi",         function() Snacks.picker.lsp_implementations() end, desc = "Goto Implementation" },
       { "gd",         function() Snacks.picker.lsp_definitions() end,     desc = "Goto Definition" },
       { "gr",         function() Snacks.picker.lsp_references() end,      nowait = true,                     desc = "References" },
-      { "<leader>cr", function() Snacks.rename() end,                     desc = "Code Rename" },
+      { "<leader>rf", function() Snacks.rename.rename_file() end,         desc = "Rename File via LSP" },
 
       -- UI & Notifications (<leader>u...)
       { "<leader>un", function() Snacks.notifier.hide() end,              desc = "Dismiss All Notifications" },

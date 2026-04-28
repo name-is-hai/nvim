@@ -4,6 +4,9 @@ return {
     version = "*",
     event = { "InsertEnter", "CmdlineEnter" },
     dependencies = { "rafamadriz/friendly-snippets" },
+    signature = {
+      enabled = false
+    },
     opts = {
       -- KEYMAP UPDATE
       keymap = {

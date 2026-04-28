@@ -30,6 +30,7 @@ return {
         "dotenv-linter",
         "trivy",
         "terraform",
+        "terraform-ls",
         "prettier",
       },
     },
@@ -66,10 +67,16 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     dependencies = { "mason-org/mason-lspconfig.nvim", "saghen/blink.cmp" },
     config = function()
-      -- Grab the capabilities from Blink
       local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      -- Neovim 0.11+ Native API: Inject the capabilities globally into ALL servers!
+      vim.lsp.config("terraformls", {
+        settings = {
+          terraform = {
+            ignoreSingleFileWarning = true,
+          },
+        },
+      })
+
       vim.lsp.config("*", {
         capabilities = capabilities,
       })
@@ -79,7 +86,6 @@ return {
           source = "if_many",
           prefix = "●",
         },
-        -- MODERN WAY TO DEFINE ICONS (Fixes the deprecation warning)
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = " ",
@@ -99,7 +105,6 @@ return {
         },
       })
 
-      -- Your LSP Keyboard Shortcuts
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspConfig", {}),
         callback = function(ev)
@@ -108,6 +113,7 @@ return {
           end
 
           map("K", vim.lsp.buf.hover, "Hover Documentation")
+          map("<leader>crn", vim.lsp.buf.rename, "Rename Variable/Function")
           map("<leader>ca", vim.lsp.buf.code_action, "Code Action")
           map("<leader>cd", vim.diagnostic.open_float, "Show Line Diagnostics")
         end,
